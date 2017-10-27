@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import time
 
 class inicio:
 	def __init__(self, disp_con):

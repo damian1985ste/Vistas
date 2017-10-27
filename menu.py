@@ -1,12 +1,8 @@
 #!/usr/bin/python
-
+import time
 class menu:
 	def __init__(self, disp_con):
 		self.disp = disp_con
-		self.title =""
-		self.lineas=["", "", "", ""]
-		self.lineast=[(""," "), (""," "), (""," "), (""," ")]
-		self.sel = 1
 		self.wifi_ico = ['0011111100','0100000010','1000000001','0001111000','0010000100','0100000010','0000110000','0001001000','0000000000','0000110000']
 		self.BT_ico = ['0001000000','0001100000','1001010010','0101010001','0011100101','0011100101','0101010001','1001010010','0001100000','0001000000']
 		
@@ -40,7 +36,7 @@ class menu:
 			res[div] = res[div]+" "
 		return res
     
-	def imp_menu_op(self,lineas = self.lineas, sel = self.sel, wifi=False, BT=False):
+	def imp_menu_op(self, lineas=["", "", "", ""], sel=1, wifi=False, BT=False):
 		'''Esta funcion realiza la impresion en pantalla del menu de 
 		acuerdo a lineas lista de lineas que son
 		las opciones del menu y se encontrara seleccionada la que 
@@ -56,13 +52,13 @@ class menu:
 		self.disp.put_text(fecha+'-'+hora,2,3)
 		if wifi:
 			for y1 in range(len(self.wifi_ico)):
-      			for x1 in range(len(self.wifi_ico[y1])):
-	        		self.disp.plot(x1+102,y1+2,int(self.wifi_ico[y1][x1]))
+      				for x1 in range(len(self.wifi_ico[y1])):
+	        			self.disp.plot(x1+102,y1+2,int(self.wifi_ico[y1][x1]))
 		if BT:
 			for y2 in range(len(self.BT_ico)):
-      			for x2 in range(len(self.BT_ico[y2])):
-        			self.disp.plot(x2+115,y2+2,int(self.BT_ico[y2][x2]))     
-		return self.disp.redraw(0,0,127,13)
+      				for x2 in range(len(self.BT_ico[y2])):
+        				self.disp.plot(x2+115,y2+2,int(self.BT_ico[y2][x2]))     
+		self.disp.redraw(0,0,127,13)
 		##=============================================================
 		lineas21 = list(map(self.cadena_l_21,lineas))
 		#self.disp.clear()
@@ -96,7 +92,7 @@ class menu:
 		time.sleep(0.01)
 		return 1
 		
-	def imp_menu_sel(self, title=self.title, sel= self.sel, lineas=self.lineast, cmd1="X", cmd2="X"):
+	def imp_menu_sel(self, title="", sel=1, lineas=[(""," "), (""," "), (""," "), (""," ")], cmd1="X", cmd2="X"):
 		'''Esta funcion imprime la pantalla de seleccion a partir de los datos 
 		que recibe como parametros: title el titulo de la pantalla, sel la opcion
 		seleccionada, lineas una lista de 4 tuplas con el par parametro opcion'''
